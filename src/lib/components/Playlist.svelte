@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
-	const { type, amount, difficulty } = $props();
+	const { type, amount, difficulty = undefined } = $props();
 
-	// svelte-ignore state_referenced_locally
-	const url = `${type}-${amount}-${difficulty}`;
+	const url = $derived(difficulty ? `${type}-${amount}-${difficulty}` : `${type}-${amount}`);
 </script>
 
 <div class="playlist-container">

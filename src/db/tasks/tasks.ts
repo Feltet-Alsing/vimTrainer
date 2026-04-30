@@ -26,17 +26,15 @@ export function getPlayList(
 	amount: number,
 	difficulty: string | undefined
 ): (typeof tasks)[keyof typeof tasks]['tasks'] {
-	const playList = tasks[type].tasks;
+	let playList = tasks[type].tasks;
 
-	const filtered = playList.filter((x) => {
-		if (difficulty) {
+	if (difficulty) {
+		playList = playList.filter((x) => {
 			if (x.difficulty.toLowerCase() === difficulty.toLowerCase()) {
 				return x;
 			}
-		} else {
-			return x;
-		}
-	});
+		});
+	}
 
-	return filtered.slice(0, amount);
+	return playList.slice(0, amount);
 }
