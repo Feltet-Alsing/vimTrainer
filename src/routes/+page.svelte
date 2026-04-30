@@ -11,6 +11,7 @@
 	</div>
 
 	<Playlist amount="10" type="typos" difficulty="Easy" />
+	<Playlist amount="10" type="move" difficulty="Easy" />
 </div>
 
 <style>
