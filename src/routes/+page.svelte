@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import Playlist from '$lib/components/Playlist.svelte';
-
-	console.log(page);
 </script>
 
 <div class="container">
@@ -13,7 +10,7 @@
 		<p>Welcome to Vim Motion Trainer!</p>
 	</div>
 
-	<Playlist tasks={page.data.typos} />
+	<Playlist amount="10" type="typos" difficulty="Easy" />
 </div>
 
 <style>
