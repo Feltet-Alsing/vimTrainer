@@ -1,0 +1,35 @@
+:root {
+    --app-bg: #0f1012;
+    --app-fg: #f2f3f5;
+    --editor-select: rgba(67, 143, 255, 0.44);
+    --editor-select-soft: rgba(67, 143, 255, 0.3);
+    --editor-active-line: rgba(255, 255, 255, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    background-color: var(--app-bg);
+    color: var(--app-fg);
+}
+
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground,
+.cm-vimMode .cm-selectionBackground {
+    background-color: var(--editor-select) !important;
+}
+
+.cm-editor .cm-line::selection,
+.cm-editor .cm-line ::selection {
+    background-color: var(--editor-select-soft) !important;
+}
+
+.cm-editor .cm-activeLine,
+.cm-editor .cm-activeLineGutter {
+    background-color: var(--editor-active-line) !important;
+}
