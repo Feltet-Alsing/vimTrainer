@@ -8,8 +8,9 @@
 	// Get the best time for this task type
 	const bestTime = $derived(() => {
 		if (Array.isArray(type)) {
-			// For multiple types, show the combined best or skip
-			return null;
+			// For mixed tasks, look up the joined key
+			const mixedKey = type.join(',');
+			return records[mixedKey]?.record_time || null;
 		}
 		return records[type]?.record_time || null;
 	});

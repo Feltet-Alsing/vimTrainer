@@ -34,7 +34,7 @@
 			<nav class="nav">
 				{#if data.user}
 					<span class="username">Hi, {data.user.username}</span>
-					<form method="POST" action="/?/logout">
+					<form method="POST" action={resolve('/logout')}>
 						<button type="submit" class="nav-btn logout">Logout</button>
 					</form>
 				{:else}
@@ -50,7 +50,7 @@
 
 	<footer class="app-footer">
 		<div class="footer-container">
-			<p class="footer-text">Master Vim motions through practice</p>
+			<p class="footer-text">Fordi Filip er for langsom...</p>
 			<div class="footer-links">
 				<a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
 				<span class="separator">•</span>

@@ -112,21 +112,56 @@
 		const openChar = targetChar;
 		const closeChar = pairs[targetChar] || targetChar;
 
-		// Search backwards for opening char
-		let startPos = -1;
-		for (let i = pos - 1; i >= 0; i--) {
-			if (line[i] === openChar) {
-				startPos = i;
-				break;
-			}
-		}
+		// For symmetric pairs (quotes), we need smarter detection
+		const isSymmetric = openChar === closeChar;
 
-		// Search forwards for closing char
+		let startPos = -1;
 		let endPos = -1;
-		for (let i = pos; i < line.length; i++) {
-			if (line[i] === closeChar) {
-				endPos = i;
-				break;
+
+		if (isSymmetric) {
+			// Find pairs of quotes
+			const positions: number[] = [];
+			for (let i = 0; i < line.length; i++) {
+				if (line[i] === openChar) {
+					positions.push(i);
+				}
+			}
+
+			// Find the pair that surrounds the cursor
+			for (let i = 0; i < positions.length - 1; i += 2) {
+				if (positions[i] <= pos && pos <= positions[i + 1]) {
+					startPos = positions[i];
+					endPos = positions[i + 1];
+					break;
+				}
+			}
+		} else {
+			// For asymmetric pairs (brackets), search outward
+			let depth = 0;
+
+			// Search backwards for opening char
+			for (let i = pos; i >= 0; i--) {
+				if (line[i] === closeChar) depth++;
+				if (line[i] === openChar) {
+					if (depth === 0) {
+						startPos = i;
+						break;
+					}
+					depth--;
+				}
+			}
+
+			// Search forwards for closing char
+			depth = 0;
+			for (let i = pos; i < line.length; i++) {
+				if (line[i] === openChar) depth++;
+				if (line[i] === closeChar) {
+					if (depth === 0) {
+						endPos = i;
+						break;
+					}
+					depth--;
+				}
 			}
 		}
 

@@ -7,7 +7,7 @@
 <div class="container">
 	<header class="header">
 		<h1>Vim Motion Trainer</h1>
-		<p class="subtitle">Master Vim motions through interactive practice</p>
+		<p class="subtitle">Fordi Filip er for langsom...</p>
 	</header>
 
 	<div class="playlists">

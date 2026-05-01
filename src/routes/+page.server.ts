@@ -15,6 +15,13 @@ export const load = async ({ locals }) => {
 				records[taskType] = record;
 			}
 		}
+
+		// Also fetch mixed task record
+		const mixedTaskType = 'typos,move,surround';
+		const mixedRecord = await getRecord(user.id, mixedTaskType);
+		if (mixedRecord) {
+			records[mixedTaskType] = mixedRecord;
+		}
 	}
 
 	return { typos, records };
