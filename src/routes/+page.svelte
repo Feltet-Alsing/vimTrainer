@@ -1,45 +1,75 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import Playlist from '$lib/components/Playlist.svelte';
 
 	const { data } = $props();
-	console.log(page);
 </script>
 
 <div class="container">
-	<h1>Vim Motion Trainer</h1>
-	<p class="subtitle">Practice your Vim skills</p>
+	<header class="header">
+		<h1>Vim Motion Trainer</h1>
+		<p class="subtitle">Master Vim motions through interactive practice</p>
+	</header>
 
-	<div class="content">
-		<p>Welcome to Vim Motion Trainer!</p>
+	<div class="playlists">
+		<Playlist amount="10" type={['typos', 'move', 'surround']} records={data.records} />
+		<Playlist amount="10" type="move" records={data.records} />
+		<Playlist amount="10" type="surround" difficulty="Easy" records={data.records} />
 	</div>
-
-	<Playlist amount="10" type={['typos', 'move', 'surround']} records={data.records} />
-	<Playlist amount="10" type="move" records={data.records} />
-	<Playlist amount="10" type="surround" difficulty="Easy" records={data.records} />
 </div>
 
 <style>
 	.container {
-		max-width: 900px;
-		margin: 2rem auto;
-		padding: 0 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 3rem 2rem;
+		min-height: 100vh;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 4rem;
 	}
 
 	h1 {
-		text-align: center;
-		color: var(--app-fg);
-		margin-bottom: 0.5rem;
+		font-size: 3rem;
+		font-weight: 700;
+		color: #fff;
+		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 	}
 
 	.subtitle {
-		text-align: center;
-		color: rgba(242, 243, 245, 0.7);
-		margin-bottom: 2rem;
+		font-size: 1.125rem;
+		color: #9ca3af;
+		margin: 0;
+		font-weight: 400;
 	}
 
-	.content {
-		text-align: center;
-		padding: 2rem;
+	.playlists {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 2rem 1rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		.subtitle {
+			font-size: 1rem;
+		}
+
+		.playlists {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
