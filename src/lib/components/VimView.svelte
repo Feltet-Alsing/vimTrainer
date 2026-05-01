@@ -2,6 +2,8 @@
 	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import { EditorView, basicSetup } from 'codemirror';
+	import { keymap } from '@codemirror/view';
+	import { Prec } from '@codemirror/state';
 	import { javascript } from '@codemirror/lang-javascript';
 	import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 	import { tags } from '@lezer/highlight';
@@ -66,9 +68,200 @@
 		}, 1000);
 	}
 
+	// Helper function to get closing character
+	const getClosingChar = (char: string) => {
+		const pairs: Record<string, string> = {
+			'(': ')',
+			')': ')',
+			'[': ']',
+			']': ']',
+			'{': '}',
+			'}': '}',
+			'<': '>',
+			'>': '>'
+		};
+		return pairs[char] || char;
+	};
+
+	// State for surround mode
+	let waitingForSurroundChar = false;
+	let savedSelection = '';
+
+	// State for change surround (cs) mode
+	let waitingForFromChar = false;
+	let waitingForToChar = false;
+	let fromChar = '';
+
+	// Helper to find surrounding characters around cursor
+	const findSurroundingChars = (cm: any, targetChar: string) => {
+		const cursor = cm.getCursor();
+		const line = cm.getLine(cursor.line);
+		const pos = cursor.ch;
+
+		// Map of opening to closing chars
+		const pairs: Record<string, string> = {
+			'"': '"',
+			"'": "'",
+			'`': '`',
+			'(': ')',
+			'[': ']',
+			'{': '}'
+		};
+
+		const openChar = targetChar;
+		const closeChar = pairs[targetChar] || targetChar;
+
+		// Search backwards for opening char
+		let startPos = -1;
+		for (let i = pos - 1; i >= 0; i--) {
+			if (line[i] === openChar) {
+				startPos = i;
+				break;
+			}
+		}
+
+		// Search forwards for closing char
+		let endPos = -1;
+		for (let i = pos; i < line.length; i++) {
+			if (line[i] === closeChar) {
+				endPos = i;
+				break;
+			}
+		}
+
+		if (startPos !== -1 && endPos !== -1) {
+			return {
+				start: { line: cursor.line, ch: startPos },
+				end: { line: cursor.line, ch: endPos },
+				content: line.substring(startPos + 1, endPos)
+			};
+		}
+
+		return null;
+	};
+
+	// Create surround keymap with highest precedence
+	const surroundKeymap = Prec.highest(
+		keymap.of([
+			{
+				key: 'S',
+				run: (view) => {
+					const cm = getCM(view);
+					if (cm && cm.state.vim && cm.state.vim.visualMode) {
+						// Just save the selected text
+						savedSelection = cm.getSelection();
+						waitingForSurroundChar = true;
+						return true; // Prevent default S behavior
+					}
+					return false;
+				}
+			},
+			{
+				key: 'c',
+				run: (view) => {
+					const cm = getCM(view);
+					if (cm && cm.state.vim && !cm.state.vim.visualMode && cm.state.vim.mode === 'normal') {
+						// Check if next key is 's'
+						waitingForFromChar = true;
+						return false; // Let Vim see the 'c' first
+					}
+					return false;
+				}
+			},
+			{
+				key: 's',
+				run: (view) => {
+					if (waitingForFromChar) {
+						waitingForFromChar = false;
+						waitingForToChar = false;
+						fromChar = '';
+						// Now wait for the "from" character
+						setTimeout(() => {
+							waitingForFromChar = true;
+						}, 0);
+						return true;
+					}
+					return false;
+				}
+			},
+			{
+				any: (view, event) => {
+					// Handle S surround character input
+					if (waitingForSurroundChar && event.key.length === 1) {
+						const cm = getCM(view);
+						if (cm) {
+							const openChar = event.key;
+							const closeChar = getClosingChar(event.key);
+
+							// Simply replace selection with surrounded text
+							cm.replaceSelection(openChar + savedSelection + closeChar);
+							Vim.exitVisualMode(cm, false);
+
+							waitingForSurroundChar = false;
+							return true;
+						}
+					}
+
+					// Handle cs "from" character
+					if (waitingForFromChar && event.key.length === 1) {
+						fromChar = event.key;
+						waitingForFromChar = false;
+						waitingForToChar = true;
+						return true;
+					}
+
+					// Handle cs "to" character
+					if (waitingForToChar && event.key.length === 1) {
+						const cm = getCM(view);
+						if (cm) {
+							const toChar = event.key;
+							const result = findSurroundingChars(cm, fromChar);
+
+							if (result) {
+								const openChar = toChar;
+								const closeChar = getClosingChar(toChar);
+
+								// Replace opening char
+								cm.replaceRange(openChar, result.start, {
+									line: result.start.line,
+									ch: result.start.ch + 1
+								});
+
+								// Replace closing char (adjust for changed position)
+								cm.replaceRange(closeChar, result.end, {
+									line: result.end.line,
+									ch: result.end.ch + 1
+								});
+							}
+
+							waitingForToChar = false;
+							fromChar = '';
+							return true;
+						}
+					}
+
+					if (waitingForSurroundChar && event.key === 'Escape') {
+						waitingForSurroundChar = false;
+						return true;
+					}
+
+					if ((waitingForFromChar || waitingForToChar) && event.key === 'Escape') {
+						waitingForFromChar = false;
+						waitingForToChar = false;
+						fromChar = '';
+						return true;
+					}
+
+					return false;
+				}
+			}
+		])
+	);
+
 	onMount(() => {
 		editor = new EditorView({
 			extensions: [
+				surroundKeymap,
 				vim(),
 				basicSetup,
 				javascript(),

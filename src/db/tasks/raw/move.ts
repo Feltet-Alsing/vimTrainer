@@ -10,8 +10,10 @@ export const move = [
 		id: 1
 	},
 	{
-		content: 'const lastName = "Doe";\nconst firstName = "John";',
-		facit: 'const firstName = "John";\nconst lastName = "Doe";',
+		content:
+			'const fullName = firstName + " " + lastName;\nconst firstName = "John";\nconst lastName = "Doe";',
+		facit:
+			'const firstName = "John";\nconst lastName = "Doe";\nconst fullName = firstName + " " + lastName;',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 2
@@ -24,8 +26,8 @@ export const move = [
 		id: 3
 	},
 	{
-		content: 'greet("World");\nfunction greet(name) {\n\tconsole.log(`Hello ${name}`);\n}',
-		facit: 'function greet(name) {\n\tconsole.log(`Hello ${name}`);\n}\ngreet("World");',
+		content: 'greet("World");\nconst greet = (name) => {\n\tconsole.log(`Hello ${name}`);\n};',
+		facit: 'const greet = (name) => {\n\tconsole.log(`Hello ${name}`);\n};\ngreet("World");',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 4
@@ -39,9 +41,9 @@ export const move = [
 	},
 	{
 		content:
-			'module.exports = calculator;\nfunction calculator(a, b) {\n\treturn { add: a + b, multiply: a * b };\n}',
+			'module.exports = calculator;\nconst calculator = (a, b) => {\n\treturn { add: a + b, multiply: a * b };\n};',
 		facit:
-			'function calculator(a, b) {\n\treturn { add: a + b, multiply: a * b };\n}\nmodule.exports = calculator;',
+			'const calculator = (a, b) => {\n\treturn { add: a + b, multiply: a * b };\n};\nmodule.exports = calculator;',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 6
@@ -71,9 +73,9 @@ export const move = [
 	},
 	{
 		content:
-			'export { helper };\n\nfunction helper() {\n\treturn "help";\n}\n\nfunction main() {\n\treturn helper();\n}',
+			'export { helper };\n\nconst helper = () => {\n\treturn "help";\n};\n\nconst main = () => {\n\treturn helper();\n};',
 		facit:
-			'function helper() {\n\treturn "help";\n}\n\nfunction main() {\n\treturn helper();\n}\n\nexport { helper };',
+			'const helper = () => {\n\treturn "help";\n};\n\nconst main = () => {\n\treturn helper();\n};\n\nexport { helper };',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 10
@@ -91,7 +93,7 @@ export const move = [
 		content:
 			'return {\n\tusername,\n\temail,\n\tid\n};\nconst id = user.id;\nconst username = user.name;\nconst email = user.email;',
 		facit:
-			'const id = user.id;\nconst username = user.name;\nconst email = user.email;\nreturn {\n\tid,\n\tusername,\n\temail\n};',
+			'const id = user.id;\nconst username = user.name;\nconst email = user.email;\nreturn {\n\tusername,\n\temail,\n\tid\n};',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 12
@@ -109,18 +111,18 @@ export const move = [
 	// Hard - Complex reordering with multiple dependencies
 	{
 		content:
-			'function main() {\n\tconst data = getData();\n\treturn processResult(data);\n}\n\nfunction getData() {\n\treturn fetchFromAPI();\n}\n\nfunction fetchFromAPI() {\n\treturn { items: [1, 2, 3] };\n}',
+			'const api = new APIClient(config);\nconst endpoint = config.endpoint;\nconst config = loadConfig();\n\napi.connect(endpoint);',
 		facit:
-			'function fetchFromAPI() {\n\treturn { items: [1, 2, 3] };\n}\n\nfunction getData() {\n\treturn fetchFromAPI();\n}\n\nfunction main() {\n\tconst data = getData();\n\treturn processResult(data);\n}',
+			'const config = loadConfig();\nconst endpoint = config.endpoint;\nconst api = new APIClient(config);\n\napi.connect(endpoint);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 14
 	},
 	{
 		content:
-			'async function main() {\n\tawait processData();\n\tawait validateData();\n\tawait fetchData();\n}',
+			'async function init() {\n\tawait connect(dbUrl);\n\tawait loadSchema(db);\n\tconst db = getDatabase();\n\tconst dbUrl = getConnectionString();\n}',
 		facit:
-			'async function main() {\n\tawait fetchData();\n\tawait validateData();\n\tawait processData();\n}',
+			'async function init() {\n\tconst dbUrl = getConnectionString();\n\tconst db = getDatabase();\n\tawait connect(dbUrl);\n\tawait loadSchema(db);\n}',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 15
@@ -134,9 +136,9 @@ export const move = [
 	},
 	{
 		content:
-			'export default class DataService {\n\tgetData() {\n\t\treturn this.fetch();\n\t}\n\n\tdeleteData() {\n\t\treturn this.remove();\n\t}\n\n\tcreateData() {\n\t\treturn this.save();\n\t}\n}',
+			'class Calculator {\n\tconstructor() {\n\t\tthis.result = initialValue;\n\t}\n\n\treset() {\n\t\tthis.result = initialValue;\n\t}\n}\n\nconst initialValue = 0;',
 		facit:
-			'export default class DataService {\n\tcreateData() {\n\t\treturn this.save();\n\t}\n\n\tgetData() {\n\t\treturn this.fetch();\n\t}\n\n\tdeleteData() {\n\t\treturn this.remove();\n\t}\n}',
+			'const initialValue = 0;\n\nclass Calculator {\n\tconstructor() {\n\t\tthis.result = initialValue;\n\t}\n\n\treset() {\n\t\tthis.result = initialValue;\n\t}\n}',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 17
@@ -145,25 +147,25 @@ export const move = [
 		content:
 			'const user = {\n\temail: userEmail,\n\tname: userName,\n\tid: userId,\n\trole: userRole\n};\nconst userId = 1;\nconst userName = "John";\nconst userEmail = "john@example.com";\nconst userRole = "admin";',
 		facit:
-			'const userId = 1;\nconst userName = "John";\nconst userEmail = "john@example.com";\nconst userRole = "admin";\nconst user = {\n\tid: userId,\n\tname: userName,\n\temail: userEmail,\n\trole: userRole\n};',
+			'const userId = 1;\nconst userName = "John";\nconst userEmail = "john@example.com";\nconst userRole = "admin";\nconst user = {\n\temail: userEmail,\n\tname: userName,\n\tid: userId,\n\trole: userRole\n};',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 18
 	},
 	{
 		content:
-			'pipeline.addStep(errorHandler);\npipeline.addStep(formatter);\npipeline.addStep(validator);\npipeline.addStep(parser);\npipeline.addStep(logger);',
+			'const total = items.reduce((sum, item) => sum + item.price, startValue);\nconst items = getCartItems();\nconst startValue = 0;',
 		facit:
-			'pipeline.addStep(logger);\npipeline.addStep(parser);\npipeline.addStep(validator);\npipeline.addStep(formatter);\npipeline.addStep(errorHandler);',
+			'const startValue = 0;\nconst items = getCartItems();\nconst total = items.reduce((sum, item) => sum + item.price, startValue);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 19
 	},
 	{
 		content:
-			'const server = createServer(config);\nconst config = buildConfig();\nconst options = getOptions();\n\nserver.start(port);\nconst port = 3000;',
+			'const server = createServer(config);\nconst config = buildConfig();\n\nserver.start(port);\nconst port = 3000;',
 		facit:
-			'const options = getOptions();\nconst config = buildConfig();\nconst port = 3000;\nconst server = createServer(config);\n\nserver.start(port);',
+			'const port = 3000;\nconst config = buildConfig();\nconst server = createServer(config);\n\nserver.start(port);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 20

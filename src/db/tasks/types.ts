@@ -6,5 +6,6 @@ export enum difficulty {
 
 export enum type {
 	typo = 'Typos',
-	move = 'Move'
+	move = 'Move',
+	surround = 'Surround'
 }
