@@ -31,11 +31,11 @@ export const tasks = {
 };
 
 export function getPlayList(
-	type: keyof typeof tasks,
+	type: (keyof typeof tasks)[],
 	amount: number,
 	difficulty: string | undefined
 ): (typeof tasks)[keyof typeof tasks]['tasks'] {
-	let playList = tasks[type].tasks;
+	let playList = type.flatMap((t) => tasks[t].tasks);
 
 	if (difficulty) {
 		playList = playList.filter((x) => {
@@ -44,7 +44,6 @@ export function getPlayList(
 			}
 		});
 	}
-
 	let idx = playList.length;
 
 	while (idx !== 0) {

@@ -1,5 +1,10 @@
 <script lang="ts">
 	import Playlist from '$lib/components/Playlist.svelte';
+	import { getPlayList } from '../db/tasks/tasks';
+
+	const test = getPlayList(['typos', 'move', 'surround'], 10, 'Easy');
+
+	console.log(test);
 </script>
 
 <div class="container">
@@ -10,7 +15,7 @@
 		<p>Welcome to Vim Motion Trainer!</p>
 	</div>
 
-	<Playlist amount="10" type="typos" difficulty="Easy" />
+	<Playlist amount="10" type={['typos', 'move']} difficulty="Easy" />
 	<Playlist amount="10" type="move" />
 	<Playlist amount="10" type="surround" difficulty="Easy" />
 </div>

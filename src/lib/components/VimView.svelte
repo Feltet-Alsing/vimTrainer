@@ -88,6 +88,7 @@
 	let savedSelection = '';
 
 	// State for change surround (cs) mode
+	let justPressedC = false;
 	let waitingForFromChar = false;
 	let waitingForToChar = false;
 	let fromChar = '';
@@ -161,9 +162,12 @@
 				run: (view) => {
 					const cm = getCM(view);
 					if (cm && cm.state.vim && !cm.state.vim.visualMode && cm.state.vim.mode === 'normal') {
-						// Check if next key is 's'
-						waitingForFromChar = true;
-						return false; // Let Vim see the 'c' first
+						// Set temporary flag to detect 'cs' sequence
+						justPressedC = true;
+						setTimeout(() => {
+							justPressedC = false;
+						}, 100);
+						return false; // Let Vim see the 'c'
 					}
 					return false;
 				}
@@ -171,15 +175,11 @@
 			{
 				key: 's',
 				run: (view) => {
-					if (waitingForFromChar) {
-						waitingForFromChar = false;
-						waitingForToChar = false;
-						fromChar = '';
-						// Now wait for the "from" character
-						setTimeout(() => {
-							waitingForFromChar = true;
-						}, 0);
-						return true;
+					if (justPressedC) {
+						// This is 'cs' - enter change surround mode
+						justPressedC = false;
+						waitingForFromChar = true;
+						return true; // Consume the 's'
 					}
 					return false;
 				}
