@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import Playlist from '$lib/components/Playlist.svelte';
+
+	const { data } = $props();
+	console.log(page);
 </script>
 
 <div class="container">
@@ -10,9 +14,9 @@
 		<p>Welcome to Vim Motion Trainer!</p>
 	</div>
 
-	<Playlist amount="10" type={['typos', 'move', 'surround']} />
-	<Playlist amount="10" type="move" />
-	<Playlist amount="10" type="surround" difficulty="Easy" />
+	<Playlist amount="10" type={['typos', 'move', 'surround']} records={data.records} />
+	<Playlist amount="10" type="move" records={data.records} />
+	<Playlist amount="10" type="surround" difficulty="Easy" records={data.records} />
 </div>
 
 <style>

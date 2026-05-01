@@ -40,4 +40,21 @@ export async function initDB() {
 		console.error('Error initializing sessions table:', error);
 		throw error;
 	}
+	//Records
+	try {
+		await pool.query(`
+            CREATE TABLE IF NOT EXISTS records (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                task_id VARCHAR(255) NOT NULL,
+                record_time INTEGER NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW(),
+                UNIQUE(user_id, task_id)
+            )
+        `);
+		console.log('Records table initialized successfully');
+	} catch (error) {
+		console.error('Error initializing records table:', error);
+		throw error;
+	}
 }

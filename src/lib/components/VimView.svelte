@@ -9,7 +9,7 @@
 	import { tags } from '@lezer/highlight';
 	import { getCM, Vim, vim } from '@replit/codemirror-vim';
 
-	const { tasks } = $props();
+	const { tasks, taskType = '', user = null } = $props();
 
 	let editor: EditorView;
 	let editorDiv: HTMLElement;
@@ -296,6 +296,23 @@
 		return code.replace(/\s+/g, '');
 	}
 
+	async function saveRecord(recordTime: number) {
+		if (!user) return;
+
+		try {
+			const formData = new FormData();
+			formData.append('taskType', taskType);
+			formData.append('recordTime', recordTime.toString());
+
+			await fetch('?/saveRecord', {
+				method: 'POST',
+				body: formData
+			});
+		} catch (error) {
+			console.error('Failed to save record:', error);
+		}
+	}
+
 	function check() {
 		if (normalizeForCompare(editorContent) === normalizeForCompare(tasks[currentId].facit)) {
 			if (currentId === tasks.length - 1) {
@@ -303,6 +320,8 @@
 				if (timerId) clearInterval(timerId);
 				writeToEditor(`Task Completed! \nYou completed this task in ${counter} seconds`);
 				taskCompleted = true;
+				// Save the record
+				saveRecord(counter);
 			} else {
 				currentId++;
 				const cm = getCM(editor);

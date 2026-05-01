@@ -12,7 +12,7 @@ declare global {
 	namespace App {
 		interface Locals {
 			user?: {
-				id: string;
+				id: number;
 				username: string;
 				created_at: string;
 			};
