@@ -110,59 +110,187 @@ export const typos = [
 		id: 14
 	},
 
-	// Hard typos - multiple typos or subtle mistakes
+	// Hard typos - Complex selection challenges requiring advanced Vim motions
 	{
-		content:
-			'fucntion validateUser(data) {\n\tif (data.usrename.lenght < 3) {\n\t\tretrun false;\n\t}\n\treturn true;\n}',
-		facit:
-			'function validateUser(data) {\n\tif (data.username.length < 3) {\n\t\treturn false;\n\t}\n\treturn true;\n}',
+		content: 'const us\'er = "John";',
+		facit: 'const user = "John";',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 15
 	},
 	{
-		content:
-			'try {\n\tconst data = awiat fecth("/api/users");\n\tcosole.log(data);\n} cathc (error) {\n\tconsole.error(error);\n}',
-		facit:
-			'try {\n\tconst data = await fetch("/api/users");\n\tconsole.log(data);\n} catch (error) {\n\tconsole.error(error);\n}',
+		content: "if (data.le'ngth > 0) {\n\treturn true;\n}",
+		facit: 'if (data.length > 0) {\n\treturn true;\n}',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 16
 	},
 	{
-		content:
-			'cosnt config = {\n\tapiUrl: "https://api.exmaple.com",\n\ttimeout: 5000,\n\tretires: 3\n};',
-		facit:
-			'const config = {\n\tapiUrl: "https://api.example.com",\n\ttimeout: 5000,\n\tretries: 3\n};',
+		content: "function ca'lculate(x, y) {\n\treturn x + y;\n}",
+		facit: 'function calculate(x, y) {\n\treturn x + y;\n}',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 17
 	},
 	{
-		content:
-			'clsas UserService {\n\tconstrucor(apiClient) {\n\t\tthis.client = apiClient;\n\t}\n\n\tasync getUser(id) {\n\t\tretrun this.client.get(`/users/${id}`);\n\t}\n}',
-		facit:
-			'class UserService {\n\tconstructor(apiClient) {\n\t\tthis.client = apiClient;\n\t}\n\n\tasync getUser(id) {\n\t\treturn this.client.get(`/users/${id}`);\n\t}\n}',
+		content: 'const message = "Hel\'lo World";',
+		facit: 'const message = "Hello World";',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 18
 	},
 	{
-		content:
-			'const handleSubmti = aysnc (evnet) => {\n\tevnet.preventDefault();\n\tconst rsponse = awiat submitForm();\n\tif (rsponse.ok) {\n\t\tcosole.log("Success!");\n\t}\n};',
-		facit:
-			'const handleSubmit = async (event) => {\n\tevent.preventDefault();\n\tconst response = await submitForm();\n\tif (response.ok) {\n\t\tconsole.log("Success!");\n\t}\n};',
+		content: 'const obj = { na\'me: "test", age: 30 };',
+		facit: 'const obj = { name: "test", age: 30 };',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 19
 	},
 	{
-		content:
-			'exprot async fucntion serverAction(formData) {\n\t"use sever";\n\tconst name = formData.get("nmae");\n\tif (!name || name.lenght === 0) {\n\t\tthrow new Erorr("Name is required");\n\t}\n}',
-		facit:
-			'export async function serverAction(formData) {\n\t"use server";\n\tconst name = formData.get("name");\n\tif (!name || name.length === 0) {\n\t\tthrow new Error("Name is required");\n\t}\n}',
+		content: "async function fet'chData(url) {\n\treturn await fetch(url);\n}",
+		facit: 'async function fetchData(url) {\n\treturn await fetch(url);\n}',
 		type: type.typo,
 		difficulty: difficulty.hard,
 		id: 20
+	},
+	{
+		content: "const arr = [1, 2, 3'];",
+		facit: 'const arr = [1, 2, 3];',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 21
+	},
+	{
+		content: 'return user.em\'ail || "no-email";',
+		facit: 'return user.email || "no-email";',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 22
+	},
+	{
+		content: 'const config = { po\'rt: 3000, host: "localhost" };',
+		facit: 'const config = { port: 3000, host: "localhost" };',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 23
+	},
+	{
+		content: 'console.log("Er\'ror:", error.message);',
+		facit: 'console.log("Error:", error.message);',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 24
+	},
+	{
+		content: "if (res'ponse.ok) {\n\treturn response.json();\n}",
+		facit: 'if (response.ok) {\n\treturn response.json();\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 25
+	},
+	{
+		content: "const handleCl'ick = (event) => {\n\tevent.preventDefault();\n};",
+		facit: 'const handleClick = (event) => {\n\tevent.preventDefault();\n};',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 26
+	},
+	{
+		content: "export default fu'nction App() {\n\treturn <div>Hello</div>;\n}",
+		facit: 'export default function App() {\n\treturn <div>Hello</div>;\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 27
+	},
+	{
+		content: "const value = parseInt(st'ring, 10);",
+		facit: 'const value = parseInt(string, 10);',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 28
+	},
+	{
+		content: 'return { sta\'tus: "ok", code: 200 };',
+		facit: 'return { status: "ok", code: 200 };',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 29
+	},
+	{
+		content: 'const result = await api.ge\'t("/users");',
+		facit: 'const result = await api.get("/users");',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 30
+	},
+	{
+		content: "if (condition && isVa'lid) {\n\tprocess();\n}",
+		facit: 'if (condition && isValid) {\n\tprocess();\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 31
+	},
+	{
+		content: "const title = `Welc'ome ${name}`;",
+		facit: 'const title = `Welcome ${name}`;',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 32
+	},
+	{
+		content: "class User'Service {\n\tconstructor() {}\n}",
+		facit: 'class UserService {\n\tconstructor() {}\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 33
+	},
+	{
+		content: "const handler = { onCli'ck: () => {} };",
+		facit: 'const handler = { onClick: () => {} };',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 34
+	},
+	{
+		content: "return items.fi'lter(x => x.active);",
+		facit: 'return items.filter(x => x.active);',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 35
+	},
+	{
+		content: 'const isActi\'ve = user.status === "active";',
+		facit: 'const isActive = user.status === "active";',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 36
+	},
+	{
+		content: "async function validate(da'ta) {\n\treturn data.length > 0;\n}",
+		facit: 'async function validate(data) {\n\treturn data.length > 0;\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 37
+	},
+	{
+		content: 'const endpoint = "/api/use\'rs/profile";',
+		facit: 'const endpoint = "/api/users/profile";',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 38
+	},
+	{
+		content: "if (error.mes'sage) {\n\tconsole.error(error.message);\n}",
+		facit: 'if (error.message) {\n\tconsole.error(error.message);\n}',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 39
+	},
+	{
+		content: "const total = items.red'uce((sum, x) => sum + x, 0);",
+		facit: 'const total = items.reduce((sum, x) => sum + x, 0);',
+		type: type.typo,
+		difficulty: difficulty.hard,
+		id: 40
 	}
 ];

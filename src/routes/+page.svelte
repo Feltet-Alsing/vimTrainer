@@ -14,6 +14,7 @@
 		<Playlist amount="10" type={['typos', 'move', 'surround']} records={data.records} />
 		<Playlist amount="10" type="move" records={data.records} />
 		<Playlist amount="10" type="surround" difficulty="Easy" records={data.records} />
+		<Playlist amount="10" type="typos" records={data.records} />
 	</div>
 </div>
 

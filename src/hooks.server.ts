@@ -1,4 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { initDB } from './db/db';
 import { getUserFromSession } from './db/sessionFunctions';
 
@@ -9,7 +10,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const sessionId = event.cookies.get('session_id');
 	if (sessionId) {
 		const user = await getUserFromSession(sessionId);
-		console.log('User from session:', user);
 
 		if (user) {
 			event.locals.user = {
@@ -17,8 +17,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 				username: user.username,
 				created_at: user.created_at
 			};
-			console.log('Set locals.user:', event.locals.user);
 		}
+	}
+
+	// Protect all routes except login pages - require authentication
+	const publicRoutes = ['/login', '/login/createUser'];
+	const isPublicRoute = publicRoutes.some((route) => event.url.pathname.startsWith(route));
+
+	if (!isPublicRoute && !event.locals.user) {
+		throw redirect(303, '/login');
 	}
 
 	return await resolve(event);
