@@ -15,7 +15,7 @@
 		<p>Welcome to Vim Motion Trainer!</p>
 	</div>
 
-	<Playlist amount="10" type={['typos', 'move']} difficulty="Easy" />
+	<Playlist amount="10" type={['typos', 'move', 'surround']} difficulty="Easy" />
 	<Playlist amount="10" type="move" />
 	<Playlist amount="10" type="surround" difficulty="Easy" />
 </div>
