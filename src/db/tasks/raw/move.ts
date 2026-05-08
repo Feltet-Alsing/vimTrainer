@@ -73,35 +73,35 @@ export const move = [
 		id: 10
 	},
 
-	// Medium - Move into functions/blocks or multi-line reordering
+	// Medium - Three-line dependency chains
 	{
-		content: 'function greet() {\n\treturn `Hello ${name}`;\n}\nconst name = "World";',
-		facit: 'function greet() {\n\tconst name = "World";\n\treturn `Hello ${name}`;\n}',
+		content:
+			'const fullName = first + last;\nconst last = first.toUpperCase();\nconst first = "John";',
+		facit:
+			'const first = "John";\nconst last = first.toUpperCase();\nconst fullName = first + last;',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 11
 	},
 	{
-		content: 'function calculate() {\n\treturn x + y;\n}\nconst x = 10;\nconst y = 20;',
-		facit: 'function calculate() {\n\tconst x = 10;\n\tconst y = 20;\n\treturn x + y;\n}',
+		content: 'const area = width * height;\nconst height = width * 2;\nconst width = 10;',
+		facit: 'const width = 10;\nconst height = width * 2;\nconst area = width * height;',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 12
 	},
 	{
 		content:
-			'const user = {\n\tgetName: () => firstName + " " + lastName\n};\nconst firstName = "John";\nconst lastName = "Doe";',
+			'const url = protocol + domain;\nconst domain = base + ".com";\nconst base = protocol.slice(0, 5);\nconst protocol = "https://";',
 		facit:
-			'const firstName = "John";\nconst lastName = "Doe";\nconst user = {\n\tgetName: () => firstName + " " + lastName\n};',
+			'const protocol = "https://";\nconst base = protocol.slice(0, 5);\nconst domain = base + ".com";\nconst url = protocol + domain;',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 13
 	},
 	{
-		content:
-			'if (condition) {\n\tconsole.log(message);\n}\nconst message = "Error";\nconst condition = false;',
-		facit:
-			'const condition = false;\nconst message = "Error";\nif (condition) {\n\tconsole.log(message);\n}',
+		content: 'const total = subtotal + tax;\nconst tax = subtotal * 0.1;\nconst subtotal = 100;',
+		facit: 'const subtotal = 100;\nconst tax = subtotal * 0.1;\nconst total = subtotal + tax;',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 14
@@ -116,28 +116,24 @@ export const move = [
 		id: 15
 	},
 	{
-		content:
-			'async function fetchUser() {\n\treturn await fetch(apiUrl);\n}\nconst apiUrl = "/api/user";',
-		facit:
-			'async function fetchUser() {\n\tconst apiUrl = "/api/user";\n\treturn await fetch(apiUrl);\n}',
+		content: 'const doubled = numbers.map(x => x * 2);\nconst numbers = [1, 2, 3];',
+		facit: 'const numbers = [1, 2, 3];\nconst doubled = numbers.map(x => x * 2);',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 16
 	},
 	{
-		content:
-			'const config = {\n\thost: HOST,\n\tport: PORT\n};\nconst HOST = "localhost";\nconst PORT = 3000;',
-		facit:
-			'const HOST = "localhost";\nconst PORT = 3000;\nconst config = {\n\thost: HOST,\n\tport: PORT\n};',
+		content: 'const server = createServer(port);\nconst port = 8080;',
+		facit: 'const port = 8080;\nconst server = createServer(port);',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 17
 	},
 	{
 		content:
-			'function process() {\n\treturn transform(data);\n}\nconst data = [1, 2, 3];\nfunction transform(arr) {\n\treturn arr.map(x => x * 2);\n}',
+			'const greeting = `Hello, ${name}!`;\nconst name = user.name;\nconst user = { name: "Alice" };',
 		facit:
-			'function transform(arr) {\n\treturn arr.map(x => x * 2);\n}\nfunction process() {\n\tconst data = [1, 2, 3];\n\treturn transform(data);\n}',
+			'const user = { name: "Alice" };\nconst name = user.name;\nconst greeting = `Hello, ${name}!`;',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 18
@@ -152,84 +148,80 @@ export const move = [
 		id: 19
 	},
 	{
-		content:
-			'export function init() {\n\tapp.start(port);\n}\nconst port = 8080;\nconst app = createApp();',
-		facit:
-			'const app = createApp();\nconst port = 8080;\nexport function init() {\n\tapp.start(port);\n}',
+		content: 'const endpoint = baseUrl + "/users";\nconst baseUrl = "https://api.example.com";',
+		facit: 'const baseUrl = "https://api.example.com";\nconst endpoint = baseUrl + "/users";',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 20
 	},
 
-	// Hard - Complex multi-block reordering and moving into nested structures
+	// Hard - Complex multi-line dependency chains
 	{
-		content:
-			'function createUser() {\n\treturn {\n\t\tid: userId,\n\t\tname: userName,\n\t\temail: userEmail\n\t};\n}\nconst userId = 1;\nconst userName = "Alice";\nconst userEmail = "alice@example.com";',
-		facit:
-			'function createUser() {\n\tconst userId = 1;\n\tconst userName = "Alice";\n\tconst userEmail = "alice@example.com";\n\treturn {\n\t\tid: userId,\n\t\tname: userName,\n\t\temail: userEmail\n\t};\n}',
+		content: 'const result = a + b + c;\nconst c = b + 10;\nconst b = a + 10;\nconst a = 10;',
+		facit: 'const a = 10;\nconst b = a + 10;\nconst c = b + 10;\nconst result = a + b + c;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 21
 	},
 	{
 		content:
-			'class Database {\n\tconnect() {\n\t\treturn connect(this.url);\n\t}\n}\nconst db = new Database();\nfunction connect(url) {\n\treturn `Connected to ${url}`;\n}\nDatabase.prototype.url = "localhost";',
+			'const display = firstName + middleName + lastName;\nconst lastName = middleName + "Smith";\nconst middleName = firstName + " M. ";\nconst firstName = "John";',
 		facit:
-			'function connect(url) {\n\treturn `Connected to ${url}`;\n}\nclass Database {\n\tconnect() {\n\t\treturn connect(this.url);\n\t}\n}\nDatabase.prototype.url = "localhost";\nconst db = new Database();',
+			'const firstName = "John";\nconst middleName = firstName + " M. ";\nconst lastName = middleName + "Smith";\nconst display = firstName + middleName + lastName;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 22
 	},
 	{
 		content:
-			'async function init() {\n\tconst result = await fetchData(url);\n\treturn result;\n}\nconst url = buildUrl(config);\nfunction buildUrl(cfg) {\n\treturn `${cfg.host}:${cfg.port}`;\n}\nconst config = { host: "localhost", port: 3000 };',
+			'const final = initial + multiplier + offset;\nconst offset = multiplier + 5;\nconst multiplier = initial * 2;\nconst initial = 10;',
 		facit:
-			'const config = { host: "localhost", port: 3000 };\nfunction buildUrl(cfg) {\n\treturn `${cfg.host}:${cfg.port}`;\n}\nconst url = buildUrl(config);\nasync function init() {\n\tconst result = await fetchData(url);\n\treturn result;\n}',
+			'const initial = 10;\nconst multiplier = initial * 2;\nconst offset = multiplier + 5;\nconst final = initial + multiplier + offset;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 23
 	},
 	{
 		content:
-			'const app = {\n\tstart: () => server.listen(PORT),\n\tstop: () => server.close()\n};\nconst PORT = 3000;\nconst server = createServer();\nfunction createServer() {\n\treturn { listen: () => {}, close: () => {} };\n}',
+			'const path = root + sep + folder + file;\nconst file = folder + "/data.txt";\nconst folder = sep + "documents";\nconst sep = root + "/";\nconst root = "/home";',
 		facit:
-			'const PORT = 3000;\nfunction createServer() {\n\treturn { listen: () => {}, close: () => {} };\n}\nconst server = createServer();\nconst app = {\n\tstart: () => server.listen(PORT),\n\tstop: () => server.close()\n};',
+			'const root = "/home";\nconst sep = root + "/";\nconst folder = sep + "documents";\nconst file = folder + "/data.txt";\nconst path = root + sep + folder + file;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 24
 	},
 	{
 		content:
-			'export { helper, main };\nconst result = main();\nfunction main() {\n\treturn helper(data);\n}\nconst data = "input";\nfunction helper(input) {\n\treturn input.toUpperCase();\n}',
+			'const summary = title + description;\nconst description = content.slice(len);\nconst len = content.length - 100;\nconst content = title + " is a long text...";\nconst title = "Summary";',
 		facit:
-			'const data = "input";\nfunction helper(input) {\n\treturn input.toUpperCase();\n}\nfunction main() {\n\treturn helper(data);\n}\nconst result = main();\nexport { helper, main };',
+			'const title = "Summary";\nconst content = title + " is a long text...";\nconst len = content.length - 100;\nconst description = content.slice(len);\nconst summary = title + description;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 25
 	},
 	{
 		content:
-			'function renderApp() {\n\tconst element = createElement(tag, props);\n\treturn element;\n}\nconst tag = "div";\nconst props = { className: "app" };\nfunction createElement(t, p) {\n\treturn { type: t, props: p };\n}',
+			'const formatted = prefix + value + suffix;\nconst suffix = value + "]";\nconst value = prefix + "data";\nconst prefix = "[";',
 		facit:
-			'function createElement(t, p) {\n\treturn { type: t, props: p };\n}\nfunction renderApp() {\n\tconst tag = "div";\n\tconst props = { className: "app" };\n\tconst element = createElement(tag, props);\n\treturn element;\n}',
+			'const prefix = "[";\nconst value = prefix + "data";\nconst suffix = value + "]";\nconst formatted = prefix + value + suffix;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 26
 	},
 	{
 		content:
-			'const middleware = {\n\tvalidate: (req) => checker(req, rules)\n};\nconst rules = { required: true };\nfunction checker(request, r) {\n\treturn r.required && request.body;\n}',
+			'const output = transform(input);\nconst input = normalize(raw);\nconst raw = " hello ";',
 		facit:
-			'function checker(request, r) {\n\treturn r.required && request.body;\n}\nconst rules = { required: true };\nconst middleware = {\n\tvalidate: (req) => checker(req, rules)\n};',
+			'const raw = " hello ";\nconst input = normalize(raw);\nconst output = transform(input);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 27
 	},
 	{
 		content:
-			'async function loadData() {\n\tconst response = await api.get(endpoint);\n\treturn parse(response);\n}\nconst endpoint = "/api/data";\nconst api = createClient(baseUrl);\nfunction parse(res) {\n\treturn res.json();\n}\nconst baseUrl = "https://api.example.com";',
+			'const result = step3;\nconst step3 = step2 * 2;\nconst step2 = step1 + 5;\nconst step1 = 10;',
 		facit:
-			'const baseUrl = "https://api.example.com";\nconst api = createClient(baseUrl);\nconst endpoint = "/api/data";\nfunction parse(res) {\n\treturn res.json();\n}\nasync function loadData() {\n\tconst response = await api.get(endpoint);\n\treturn parse(response);\n}',
+			'const step1 = 10;\nconst step2 = step1 + 5;\nconst step3 = step2 * 2;\nconst result = step3;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 28
@@ -245,99 +237,99 @@ export const move = [
 	},
 	{
 		content:
-			'function buildQuery() {\n\treturn {\n\t\tselect: fields,\n\t\tfrom: table,\n\t\twhere: condition\n\t};\n}\nconst fields = ["id", "name"];\nconst table = "users";\nconst condition = "active = true";',
+			'const final = formatted + "!!";\nconst formatted = upper.trim();\nconst upper = lower.toUpperCase();\nconst lower = text.toLowerCase();\nconst text = raw.slice(1);\nconst raw = " HeLLo ";',
 		facit:
-			'function buildQuery() {\n\tconst fields = ["id", "name"];\n\tconst table = "users";\n\tconst condition = "active = true";\n\treturn {\n\t\tselect: fields,\n\t\tfrom: table,\n\t\twhere: condition\n\t};\n}',
+			'const raw = " HeLLo ";\nconst text = raw.slice(1);\nconst lower = text.toLowerCase();\nconst upper = lower.toUpperCase();\nconst formatted = upper.trim();\nconst final = formatted + "!!";',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 30
 	},
 	{
 		content:
-			'const router = {\n\tget: (path) => handler(path, routes),\n\tpost: (path) => handler(path, routes)\n};\nconst routes = new Map();\nfunction handler(p, r) {\n\treturn r.get(p);\n}',
+			'const htmlTag = opening + content + closing;\nconst closing = content + `</${tag}>`;\nconst content = opening + "Hello";\nconst opening = `<${tag}>`;\nconst tag = "div";',
 		facit:
-			'const routes = new Map();\nfunction handler(p, r) {\n\treturn r.get(p);\n}\nconst router = {\n\tget: (path) => handler(path, routes),\n\tpost: (path) => handler(path, routes)\n};',
+			'const tag = "div";\nconst opening = `<${tag}>`;\nconst content = opening + "Hello";\nconst closing = content + `</${tag}>`;\nconst htmlTag = opening + content + closing;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 31
 	},
 	{
 		content:
-			'export function initApp() {\n\tsetup(config);\n\tstart(server);\n}\nconst config = loadConfig();\nconst server = createServer(port);\nfunction setup(cfg) {\n\tconsole.log("Setup", cfg);\n}\nfunction start(srv) {\n\tsrv.listen();\n}\nconst port = 3000;',
+			'const query = base + params;\nconst params = data + "?name=test";\nconst data = keys + "&id=1";\nconst keys = base + "key";\nconst base = "/api/users";',
 		facit:
-			'const port = 3000;\nconst config = loadConfig();\nconst server = createServer(port);\nfunction setup(cfg) {\n\tconsole.log("Setup", cfg);\n}\nfunction start(srv) {\n\tsrv.listen();\n}\nexport function initApp() {\n\tsetup(config);\n\tstart(server);\n}',
+			'const base = "/api/users";\nconst keys = base + "key";\nconst data = keys + "&id=1";\nconst params = data + "?name=test";\nconst query = base + params;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 32
 	},
 	{
 		content:
-			'const service = {\n\tfetch: async () => {\n\t\tconst res = await client.get(url);\n\t\treturn parser(res);\n\t}\n};\nconst url = "/api/v1/data";\nconst client = httpClient;\nfunction parser(response) {\n\treturn response.data;\n}\nconst httpClient = createClient();',
+			'const total = price + shipping + tax;\nconst tax = shipping * 0.08;\nconst shipping = price + 10;\nconst price = 100;',
 		facit:
-			'const httpClient = createClient();\nconst client = httpClient;\nconst url = "/api/v1/data";\nfunction parser(response) {\n\treturn response.data;\n}\nconst service = {\n\tfetch: async () => {\n\t\tconst res = await client.get(url);\n\t\treturn parser(res);\n\t}\n};',
+			'const price = 100;\nconst shipping = price + 10;\nconst tax = shipping * 0.08;\nconst total = price + shipping + tax;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 33
 	},
 	{
 		content:
-			'class Validator {\n\tvalidate(input) {\n\t\treturn checkRules(input, ruleSet);\n\t}\n}\nconst ruleSet = { minLength: 5, maxLength: 20 };\nfunction checkRules(val, rules) {\n\treturn val.length >= rules.minLength;\n}\nconst validator = new Validator();',
+			'const connection = protocol + host + port + path;\nconst path = resource + "/data";\nconst resource = port + "/users";\nconst port = host + ":8080";\nconst host = protocol + "//api.example.com";\nconst protocol = "https:";',
 		facit:
-			'const ruleSet = { minLength: 5, maxLength: 20 };\nfunction checkRules(val, rules) {\n\treturn val.length >= rules.minLength;\n}\nclass Validator {\n\tvalidate(input) {\n\t\treturn checkRules(input, ruleSet);\n\t}\n}\nconst validator = new Validator();',
+			'const protocol = "https:";\nconst host = protocol + "//api.example.com";\nconst port = host + ":8080";\nconst resource = port + "/users";\nconst path = resource + "/data";\nconst connection = protocol + host + port + path;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 34
 	},
 	{
 		content:
-			'function processItems() {\n\treturn items.map(item => {\n\t\treturn transform(item, options);\n\t});\n}\nconst items = [1, 2, 3, 4, 5];\nconst options = { multiply: 2 };\nfunction transform(val, opts) {\n\treturn val * opts.multiply;\n}',
+			'const step6 = step5.toUpperCase();\nconst step5 = step4.trim();\nconst step4 = step3 + "!";\nconst step3 = step2.toLowerCase();\nconst step2 = step1.slice(1);\nconst step1 = " HELLO";',
 		facit:
-			'const items = [1, 2, 3, 4, 5];\nconst options = { multiply: 2 };\nfunction transform(val, opts) {\n\treturn val * opts.multiply;\n}\nfunction processItems() {\n\treturn items.map(item => {\n\t\treturn transform(item, options);\n\t});\n}',
+			'const step1 = " HELLO";\nconst step2 = step1.slice(1);\nconst step3 = step2.toLowerCase();\nconst step4 = step3 + "!";\nconst step5 = step4.trim();\nconst step6 = step5.toUpperCase();',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 35
 	},
 	{
 		content:
-			'const store = {\n\tgetState: () => state,\n\tsetState: (newState) => {\n\t\tstate = validator(newState);\n\t}\n};\nlet state = initialState;\nconst initialState = { count: 0 };\nfunction validator(s) {\n\treturn s || initialState;\n}',
+			'const result = multiply(doubled);\nconst doubled = squared * 2;\nconst squared = base * base;\nconst base = initial + 5;\nconst initial = 3;',
 		facit:
-			'const initialState = { count: 0 };\nlet state = initialState;\nfunction validator(s) {\n\treturn s || initialState;\n}\nconst store = {\n\tgetState: () => state,\n\tsetState: (newState) => {\n\t\tstate = validator(newState);\n\t}\n};',
+			'const initial = 3;\nconst base = initial + 5;\nconst squared = base * base;\nconst doubled = squared * 2;\nconst result = multiply(doubled);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 36
 	},
 	{
 		content:
-			'async function runPipeline() {\n\tconst step1 = await first(input);\n\tconst step2 = await second(step1);\n\treturn step2;\n}\nconst input = { data: "test" };\nasync function first(data) {\n\treturn { ...data, processed: true };\n}\nasync function second(data) {\n\treturn data.processed;\n}',
+			'const output = process(cleaned);\nconst cleaned = input.trim().toLowerCase();\nconst input = suffix + raw;\nconst suffix = raw.slice(0, 1);\nconst raw = " Hello ";',
 		facit:
-			'const input = { data: "test" };\nasync function first(data) {\n\treturn { ...data, processed: true };\n}\nasync function second(data) {\n\treturn data.processed;\n}\nasync function runPipeline() {\n\tconst step1 = await first(input);\n\tconst step2 = await second(step1);\n\treturn step2;\n}',
+			'const raw = " Hello ";\nconst suffix = raw.slice(0, 1);\nconst input = suffix + raw;\nconst cleaned = input.trim().toLowerCase();\nconst output = process(cleaned);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 37
 	},
 	{
 		content:
-			'class Calculator {\n\tadd(a, b) {\n\t\treturn compute(a, b, operation);\n\t}\n}\nconst operation = "add";\nfunction compute(x, y, op) {\n\treturn op === "add" ? x + y : x - y;\n}\nconst calc = new Calculator();',
+			'const result = calc(final);\nconst final = intermediate + delta;\nconst delta = factor + 10;\nconst intermediate = factor * initial;\nconst factor = initial + 2;\nconst initial = 5;',
 		facit:
-			'const operation = "add";\nfunction compute(x, y, op) {\n\treturn op === "add" ? x + y : x - y;\n}\nclass Calculator {\n\tadd(a, b) {\n\t\treturn compute(a, b, operation);\n\t}\n}\nconst calc = new Calculator();',
+			'const initial = 5;\nconst factor = initial + 2;\nconst intermediate = factor * initial;\nconst delta = factor + 10;\nconst final = intermediate + delta;\nconst result = calc(final);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 38
 	},
 	{
 		content:
-			'const controller = {\n\thandle: async (req) => {\n\t\tconst valid = await validate(req, schema);\n\t\treturn valid ? process(req) : null;\n\t}\n};\nconst schema = { type: "object" };\nasync function validate(request, s) {\n\treturn request.type === s.type;\n}\nfunction process(request) {\n\treturn { result: request };\n}',
+			'const display = prefix + formatted + suffix;\nconst suffix = formatted + "]";\nconst formatted = value.toUpperCase();\nconst value = cleaned.trim();\nconst cleaned = prefix.toLowerCase();\nconst prefix = " Test ";',
 		facit:
-			'const schema = { type: "object" };\nasync function validate(request, s) {\n\treturn request.type === s.type;\n}\nfunction process(request) {\n\treturn { result: request };\n}\nconst controller = {\n\thandle: async (req) => {\n\t\tconst valid = await validate(req, schema);\n\t\treturn valid ? process(req) : null;\n\t}\n};',
+			'const prefix = " Test ";\nconst cleaned = prefix.toLowerCase();\nconst value = cleaned.trim();\nconst formatted = value.toUpperCase();\nconst suffix = formatted + "]";\nconst display = prefix + formatted + suffix;',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 39
 	},
 	{
 		content:
-			'function createComponent() {\n\treturn {\n\t\trender: () => template(props),\n\t\tupdate: (newProps) => {\n\t\t\tprops = merge(props, newProps);\n\t\t}\n\t};\n}\nlet props = defaultProps;\nconst defaultProps = { title: "App" };\nfunction template(p) {\n\treturn `<div>${p.title}</div>`;\n}\nfunction merge(a, b) {\n\treturn { ...a, ...b };\n}',
+			'const final = transform(processed);\nconst processed = normalize(validated);\nconst validated = validate(sanitized);\nconst sanitized = clean(input);\nconst input = raw.trim();\nconst raw = " data ";',
 		facit:
-			'const defaultProps = { title: "App" };\nlet props = defaultProps;\nfunction template(p) {\n\treturn `<div>${p.title}</div>`;\n}\nfunction merge(a, b) {\n\treturn { ...a, ...b };\n}\nfunction createComponent() {\n\treturn {\n\t\trender: () => template(props),\n\t\tupdate: (newProps) => {\n\t\t\tprops = merge(props, newProps);\n\t\t}\n\t};\n}',
+			'const raw = " data ";\nconst input = raw.trim();\nconst sanitized = clean(input);\nconst validated = validate(sanitized);\nconst processed = normalize(validated);\nconst final = transform(processed);',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 40
