@@ -10,8 +10,8 @@ export const move = [
 		id: 1
 	},
 	{
-		content: 'return total;\nconst total = a + b;',
-		facit: 'const total = a + b;\nreturn total;',
+		content: 'return sum;\nconst sum = 10 + 20;',
+		facit: 'const sum = 10 + 20;\nreturn sum;',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 2
@@ -52,8 +52,8 @@ export const move = [
 		id: 7
 	},
 	{
-		content: 'return response.json();\nconst response = await fetch(url);',
-		facit: 'const response = await fetch(url);\nreturn response.json();',
+		content: 'return response.json();\nconst response = await fetch("/api/data");',
+		facit: 'const response = await fetch("/api/data");\nreturn response.json();',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 8

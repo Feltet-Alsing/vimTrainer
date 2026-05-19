@@ -17,8 +17,8 @@ export const surround = [
 		id: 2
 	},
 	{
-		content: 'if isValid { return true; }',
-		facit: 'if (isValid) { return true; }',
+		content: 'if count > 0 { return true; }',
+		facit: 'if (count > 0) { return true; }',
 		type: type.surround,
 		difficulty: difficulty.easy,
 		id: 3
@@ -45,22 +45,22 @@ export const surround = [
 		id: 6
 	},
 	{
-		content: 'while running { process(); }',
-		facit: 'while (running) { process(); }',
+		content: 'while count < 10 { process(); }',
+		facit: 'while (count < 10) { process(); }',
 		type: type.surround,
 		difficulty: difficulty.easy,
 		id: 7
 	},
 	{
-		content: 'const list = a, b, c;',
-		facit: 'const list = [a, b, c];',
+		content: 'const list = 1, 2, 3;',
+		facit: 'const list = [1, 2, 3];',
 		type: type.surround,
 		difficulty: difficulty.easy,
 		id: 8
 	},
 	{
-		content: 'return id: 42, status: active;',
-		facit: 'return {id: 42, status: active};',
+		content: 'return id: 42, status: 200;',
+		facit: 'return {id: 42, status: 200};',
 		type: type.surround,
 		difficulty: difficulty.easy,
 		id: 9
@@ -110,15 +110,15 @@ export const surround = [
 		id: 15
 	},
 	{
-		content: 'const tuple = {x, y};',
-		facit: 'const tuple = [x, y];',
+		content: 'const tuple = {10, 20};',
+		facit: 'const tuple = [10, 20];',
 		type: type.surround,
 		difficulty: difficulty.medium,
 		id: 16
 	},
 	{
-		content: 'if {condition} { doSomething(); }',
-		facit: 'if (condition) { doSomething(); }',
+		content: 'if {count > 5} { doSomething(); }',
+		facit: 'if (count > 5) { doSomething(); }',
 		type: type.surround,
 		difficulty: difficulty.medium,
 		id: 17
@@ -159,15 +159,15 @@ export const surround = [
 		id: 22
 	},
 	{
-		content: 'while [running] { update(); }',
-		facit: 'while (running) { update(); }',
+		content: 'while [i < 10] { update(); }',
+		facit: 'while (i < 10) { update(); }',
 		type: type.surround,
 		difficulty: difficulty.medium,
 		id: 23
 	},
 	{
-		content: 'const pair = {first, second};',
-		facit: 'const pair = [first, second];',
+		content: 'const pair = {100, 200};',
+		facit: 'const pair = [100, 200];',
 		type: type.surround,
 		difficulty: difficulty.medium,
 		id: 24
@@ -175,8 +175,8 @@ export const surround = [
 
 	// Hard - Multiple operations
 	{
-		content: 'console.log(Hello, name);',
-		facit: 'console.log("Hello", name);',
+		content: 'console.log(Hello, World);',
+		facit: 'console.log("Hello", "World");',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 25
@@ -203,29 +203,29 @@ export const surround = [
 		id: 28
 	},
 	{
-		content: 'const obj = { first: (a), second: (b) };',
-		facit: 'const obj = { first: [a], second: [b] };',
+		content: 'const api = { url: /api/data, method: GET };',
+		facit: 'const api = { url: "/api/data", method: "GET" };',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 29
 	},
 	{
-		content: 'const data = { x: [1], y: [2], z: [3] };',
-		facit: 'const data = { x: (1), y: (2), z: (3) };',
+		content: 'const colors = { primary: red, secondary: blue, accent: green };',
+		facit: 'const colors = { primary: "red", secondary: "blue", accent: "green" };',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 30
 	},
 	{
-		content: 'const str = "hello" + "world";',
-		facit: "const str = 'hello' + 'world';",
+		content: 'const url = "https://" + "api.example.com" + "/users";',
+		facit: "const url = 'https://' + 'api.example.com' + '/users';",
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 31
 	},
 	{
-		content: 'alert(Error: + message);',
-		facit: 'alert("Error: " + message);',
+		content: 'alert(Error: + Something went wrong);',
+		facit: 'alert("Error: " + "Something went wrong");',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 32
@@ -238,8 +238,8 @@ export const surround = [
 		id: 33
 	},
 	{
-		content: 'console.log(Status:, active, Mode:, live);',
-		facit: 'console.log("Status:", active, "Mode:", live);',
+		content: 'console.log(Status:, OK, Mode:, production);',
+		facit: 'console.log("Status:", "OK", "Mode:", "production");',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 34
@@ -259,22 +259,22 @@ export const surround = [
 		id: 36
 	},
 	{
-		content: 'const result = { a: (x), b: (y), c: (z) };',
-		facit: 'const result = { a: [x], b: [y], c: [z] };',
+		content: 'const routes = { home: /, about: /about, contact: /contact };',
+		facit: 'const routes = { home: "/", about: "/about", contact: "/contact" };',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 37
 	},
 	{
-		content: 'const vals = { one: [1], two: [2] };',
-		facit: 'const vals = { one: (1), two: (2) };',
+		content: 'const user = { role: admin, status: active, level: premium };',
+		facit: 'const user = { role: "admin", status: "active", level: "premium" };',
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 38
 	},
 	{
-		content: 'const msg = "Error: " + code + " - " + text;',
-		facit: "const msg = 'Error: ' + code + ' - ' + text;",
+		content: 'const msg = "Error: " + "404" + " - " + "Not Found";',
+		facit: "const msg = 'Error: ' + '404' + ' - ' + 'Not Found';",
 		type: type.surround,
 		difficulty: difficulty.hard,
 		id: 39
