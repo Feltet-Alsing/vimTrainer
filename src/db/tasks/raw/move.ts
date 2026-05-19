@@ -1,7 +1,6 @@
 import { difficulty, type } from '../types';
 
 export const move = [
-	// Easy - Simple two-line swaps with clear dependency
 	{
 		content: 'console.log(result);\nconst result = 42;',
 		facit: 'const result = 42;\nconsole.log(result);',
@@ -10,8 +9,8 @@ export const move = [
 		id: 1
 	},
 	{
-		content: 'return sum;\nconst sum = 10 + 20;',
-		facit: 'const sum = 10 + 20;\nreturn sum;',
+		content: 'return total;\nconst total = price * quantity;',
+		facit: 'const total = price * quantity;\nreturn total;',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 2
@@ -31,8 +30,8 @@ export const move = [
 		id: 4
 	},
 	{
-		content: 'api.send(request);\nconst request = buildRequest();',
-		facit: 'const request = buildRequest();\napi.send(request);',
+		content: 'return response.json();\nconst response = await fetch("/api/data");',
+		facit: 'const response = await fetch("/api/data");\nreturn response.json();',
 		type: type.move,
 		difficulty: difficulty.easy,
 		id: 5
@@ -45,293 +44,122 @@ export const move = [
 		id: 6
 	},
 	{
-		content: 'renderComponent(config);\nconst config = loadConfig();',
-		facit: 'const config = loadConfig();\nrenderComponent(config);',
+		content: 'if (return true) {\n\t1 === 1\n}',
+		facit: 'if (1 === 1) {\n\treturn true;\n}',
 		type: type.move,
-		difficulty: difficulty.easy,
+		difficulty: difficulty.medium,
 		id: 7
 	},
 	{
-		content: 'return response.json();\nconst response = await fetch("/api/data");',
-		facit: 'const response = await fetch("/api/data");\nreturn response.json();',
+		content: 'function calculate({\n\treturn x + y;\n}) x, y',
+		facit: 'function calculate(x, y) {\n\treturn x + y;\n}',
 		type: type.move,
-		difficulty: difficulty.easy,
+		difficulty: difficulty.medium,
 		id: 8
 	},
 	{
-		content: 'app.use(router);\nconst router = express.Router();',
-		facit: 'const router = express.Router();\napp.use(router);',
+		content:
+			'for (let i = 0; i < arr.length; i++) {\n\tconsole.log(arr[i]);\n}\nconst arr = [1, 2, 3];',
+		facit:
+			'const arr = [1, 2, 3];\nfor (let i = 0; i < arr.length; i++) {\n\tconsole.log(arr[i]);\n}',
 		type: type.move,
-		difficulty: difficulty.easy,
+		difficulty: difficulty.medium,
 		id: 9
 	},
 	{
-		content: 'emit("update", data);\nconst data = { status: "ready" };',
-		facit: 'const data = { status: "ready" };\nemit("update", data);',
-		type: type.move,
-		difficulty: difficulty.easy,
-		id: 10
-	},
-
-	// Medium - Three-line dependency chains
-	{
 		content:
-			'const fullName = first + last;\nconst last = first.toUpperCase();\nconst first = "John";',
-		facit:
-			'const first = "John";\nconst last = first.toUpperCase();\nconst fullName = first + last;',
+			'class User {\n\tconstructor() {\n\t\tthis.role = role;\n\t}\n}\nconst role = "admin";',
+		facit: 'const role = "admin";\nclass User {\n\tconstructor() {\n\t\tthis.role = role;\n\t}\n}',
 		type: type.move,
 		difficulty: difficulty.medium,
+		id: 10
+	},
+	{
+		content:
+			'const data = fetchData();\ntry {\n\tconst result = processData(data);\n} catch (error) {\n\tconsole.error(error);\n}\nconsole.log(result);',
+		facit:
+			'const data = fetchData();\ntry {\n\tconst result = processData(data);\n\tconsole.log(result);\n} catch (error) {\n\tconsole.error(error);\n}',
+		type: type.move,
+		difficulty: difficulty.hard,
 		id: 11
 	},
 	{
-		content: 'const area = width * height;\nconst height = width * 2;\nconst width = 10;',
-		facit: 'const width = 10;\nconst height = width * 2;\nconst area = width * height;',
+		content: 'render(component);\nconst component = <App />;',
+		facit: 'const component = <App />;\nrender(component);',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 12
 	},
 	{
-		content:
-			'const url = protocol + domain;\nconst domain = base + ".com";\nconst base = protocol.slice(0, 5);\nconst protocol = "https://";',
-		facit:
-			'const protocol = "https://";\nconst base = protocol.slice(0, 5);\nconst domain = base + ".com";\nconst url = protocol + domain;',
+		content: 'return sum;\nconst sum = a + b;',
+		facit: 'const sum = a + b;\nreturn sum;',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 13
 	},
 	{
-		content: 'const total = subtotal + tax;\nconst tax = subtotal * 0.1;\nconst subtotal = 100;',
-		facit: 'const subtotal = 100;\nconst tax = subtotal * 0.1;\nconst total = subtotal + tax;',
+		content: 'socket.send(payload);\nconst payload = JSON.stringify(data);',
+		facit: 'const payload = JSON.stringify(data);\nsocket.send(payload);',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 14
 	},
 	{
-		content:
-			'class Counter {\n\tconstructor() {\n\t\tthis.count = initialValue;\n\t}\n}\nconst initialValue = 0;',
-		facit:
-			'const initialValue = 0;\nclass Counter {\n\tconstructor() {\n\t\tthis.count = initialValue;\n\t}\n}',
+		content: 'api.post(endpoint);\nconst endpoint = "/api/users";',
+		facit: 'const endpoint = "/api/users";\napi.post(endpoint);',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 15
 	},
 	{
-		content: 'const doubled = numbers.map(x => x * 2);\nconst numbers = [1, 2, 3];',
-		facit: 'const numbers = [1, 2, 3];\nconst doubled = numbers.map(x => x * 2);',
+		content: 'setState(newValue);\nconst newValue = count + 1;',
+		facit: 'const newValue = count + 1;\nsetState(newValue);',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 16
 	},
 	{
-		content: 'const server = createServer(port);\nconst port = 8080;',
-		facit: 'const port = 8080;\nconst server = createServer(port);',
+		content: 'cache.set(key, value);\nconst key = "user_123";',
+		facit: 'const key = "user_123";\ncache.set(key, value);',
 		type: type.move,
-		difficulty: difficulty.medium,
+		difficulty: difficulty.easy,
 		id: 17
 	},
 	{
-		content:
-			'const greeting = `Hello, ${name}!`;\nconst name = user.name;\nconst user = { name: "Alice" };',
-		facit:
-			'const user = { name: "Alice" };\nconst name = user.name;\nconst greeting = `Hello, ${name}!`;',
+		content: 'while (hasNext) {\n\tprocess();\n}\nconst hasNext = queue.length > 0;',
+		facit: 'const hasNext = queue.length > 0;\nwhile (hasNext) {\n\tprocess();\n}',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 18
 	},
 	{
-		content:
-			'const handler = {\n\tonClick: () => doAction(target)\n};\nconst target = document.body;',
-		facit:
-			'const target = document.body;\nconst handler = {\n\tonClick: () => doAction(target)\n};',
+		content: 'if (count > 10) {\n\treset();\n}\nconst count = items.length;',
+		facit: 'const count = items.length;\nif (count > 10) {\n\treset();\n}',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 19
 	},
 	{
-		content: 'const endpoint = baseUrl + "/users";\nconst baseUrl = "https://api.example.com";',
-		facit: 'const baseUrl = "https://api.example.com";\nconst endpoint = baseUrl + "/users";',
+		content: 'function init({\n\tconsole.log(config);\n}) config',
+		facit: 'function init(config) {\n\tconsole.log(config);\n}',
 		type: type.move,
 		difficulty: difficulty.medium,
 		id: 20
 	},
-
-	// Hard - Complex multi-line dependency chains
 	{
-		content: 'const result = a + b + c;\nconst c = b + 10;\nconst b = a + 10;\nconst a = 10;',
-		facit: 'const a = 10;\nconst b = a + 10;\nconst c = b + 10;\nconst result = a + b + c;',
+		content: 'arr.forEach(item => {\n\tconsole.log(item);\n});\nconst arr = [1, 2, 3];',
+		facit: 'const arr = [1, 2, 3];\narr.forEach(item => {\n\tconsole.log(item);\n});',
 		type: type.move,
-		difficulty: difficulty.hard,
+		difficulty: difficulty.medium,
 		id: 21
 	},
 	{
 		content:
-			'const display = firstName + middleName + lastName;\nconst lastName = middleName + "Smith";\nconst middleName = firstName + " M. ";\nconst firstName = "John";',
+			'try {\n\tawait saveData(info);\n\treturn true;\n} catch (error) {\n\tconsole.error(error);\n}\nconst info = getUserInfo();',
 		facit:
-			'const firstName = "John";\nconst middleName = firstName + " M. ";\nconst lastName = middleName + "Smith";\nconst display = firstName + middleName + lastName;',
+			'const info = getUserInfo();\ntry {\n\tawait saveData(info);\n\treturn true;\n} catch (error) {\n\tconsole.error(error);\n}',
 		type: type.move,
 		difficulty: difficulty.hard,
 		id: 22
-	},
-	{
-		content:
-			'const final = initial + multiplier + offset;\nconst offset = multiplier + 5;\nconst multiplier = initial * 2;\nconst initial = 10;',
-		facit:
-			'const initial = 10;\nconst multiplier = initial * 2;\nconst offset = multiplier + 5;\nconst final = initial + multiplier + offset;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 23
-	},
-	{
-		content:
-			'const path = root + sep + folder + file;\nconst file = folder + "/data.txt";\nconst folder = sep + "documents";\nconst sep = root + "/";\nconst root = "/home";',
-		facit:
-			'const root = "/home";\nconst sep = root + "/";\nconst folder = sep + "documents";\nconst file = folder + "/data.txt";\nconst path = root + sep + folder + file;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 24
-	},
-	{
-		content:
-			'const summary = title + description;\nconst description = content.slice(len);\nconst len = content.length - 100;\nconst content = title + " is a long text...";\nconst title = "Summary";',
-		facit:
-			'const title = "Summary";\nconst content = title + " is a long text...";\nconst len = content.length - 100;\nconst description = content.slice(len);\nconst summary = title + description;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 25
-	},
-	{
-		content:
-			'const formatted = prefix + value + suffix;\nconst suffix = value + "]";\nconst value = prefix + "data";\nconst prefix = "[";',
-		facit:
-			'const prefix = "[";\nconst value = prefix + "data";\nconst suffix = value + "]";\nconst formatted = prefix + value + suffix;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 26
-	},
-	{
-		content:
-			'const output = transform(input);\nconst input = normalize(raw);\nconst raw = " hello ";',
-		facit:
-			'const raw = " hello ";\nconst input = normalize(raw);\nconst output = transform(input);',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 27
-	},
-	{
-		content:
-			'const result = step3;\nconst step3 = step2 * 2;\nconst step2 = step1 + 5;\nconst step1 = 10;',
-		facit:
-			'const step1 = 10;\nconst step2 = step1 + 5;\nconst step3 = step2 * 2;\nconst result = step3;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 28
-	},
-	{
-		content:
-			'class EventBus {\n\tconstructor() {\n\t\tthis.events = eventStore;\n\t}\n\temit(name) {\n\t\treturn this.events[name];\n\t}\n}\nconst eventStore = {};\nconst bus = new EventBus();',
-		facit:
-			'const eventStore = {};\nclass EventBus {\n\tconstructor() {\n\t\tthis.events = eventStore;\n\t}\n\temit(name) {\n\t\treturn this.events[name];\n\t}\n}\nconst bus = new EventBus();',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 29
-	},
-	{
-		content:
-			'const final = formatted + "!!";\nconst formatted = upper.trim();\nconst upper = lower.toUpperCase();\nconst lower = text.toLowerCase();\nconst text = raw.slice(1);\nconst raw = " HeLLo ";',
-		facit:
-			'const raw = " HeLLo ";\nconst text = raw.slice(1);\nconst lower = text.toLowerCase();\nconst upper = lower.toUpperCase();\nconst formatted = upper.trim();\nconst final = formatted + "!!";',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 30
-	},
-	{
-		content:
-			'const htmlTag = opening + content + closing;\nconst closing = content + `</${tag}>`;\nconst content = opening + "Hello";\nconst opening = `<${tag}>`;\nconst tag = "div";',
-		facit:
-			'const tag = "div";\nconst opening = `<${tag}>`;\nconst content = opening + "Hello";\nconst closing = content + `</${tag}>`;\nconst htmlTag = opening + content + closing;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 31
-	},
-	{
-		content:
-			'const query = base + params;\nconst params = data + "?name=test";\nconst data = keys + "&id=1";\nconst keys = base + "key";\nconst base = "/api/users";',
-		facit:
-			'const base = "/api/users";\nconst keys = base + "key";\nconst data = keys + "&id=1";\nconst params = data + "?name=test";\nconst query = base + params;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 32
-	},
-	{
-		content:
-			'const total = price + shipping + tax;\nconst tax = shipping * 0.08;\nconst shipping = price + 10;\nconst price = 100;',
-		facit:
-			'const price = 100;\nconst shipping = price + 10;\nconst tax = shipping * 0.08;\nconst total = price + shipping + tax;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 33
-	},
-	{
-		content:
-			'const connection = protocol + host + port + path;\nconst path = resource + "/data";\nconst resource = port + "/users";\nconst port = host + ":8080";\nconst host = protocol + "//api.example.com";\nconst protocol = "https:";',
-		facit:
-			'const protocol = "https:";\nconst host = protocol + "//api.example.com";\nconst port = host + ":8080";\nconst resource = port + "/users";\nconst path = resource + "/data";\nconst connection = protocol + host + port + path;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 34
-	},
-	{
-		content:
-			'const step6 = step5.toUpperCase();\nconst step5 = step4.trim();\nconst step4 = step3 + "!";\nconst step3 = step2.toLowerCase();\nconst step2 = step1.slice(1);\nconst step1 = " HELLO";',
-		facit:
-			'const step1 = " HELLO";\nconst step2 = step1.slice(1);\nconst step3 = step2.toLowerCase();\nconst step4 = step3 + "!";\nconst step5 = step4.trim();\nconst step6 = step5.toUpperCase();',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 35
-	},
-	{
-		content:
-			'const result = multiply(doubled);\nconst doubled = squared * 2;\nconst squared = base * base;\nconst base = initial + 5;\nconst initial = 3;',
-		facit:
-			'const initial = 3;\nconst base = initial + 5;\nconst squared = base * base;\nconst doubled = squared * 2;\nconst result = multiply(doubled);',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 36
-	},
-	{
-		content:
-			'const output = process(cleaned);\nconst cleaned = input.trim().toLowerCase();\nconst input = suffix + raw;\nconst suffix = raw.slice(0, 1);\nconst raw = " Hello ";',
-		facit:
-			'const raw = " Hello ";\nconst suffix = raw.slice(0, 1);\nconst input = suffix + raw;\nconst cleaned = input.trim().toLowerCase();\nconst output = process(cleaned);',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 37
-	},
-	{
-		content:
-			'const result = calc(final);\nconst final = intermediate + delta;\nconst delta = factor + 10;\nconst intermediate = factor * initial;\nconst factor = initial + 2;\nconst initial = 5;',
-		facit:
-			'const initial = 5;\nconst factor = initial + 2;\nconst intermediate = factor * initial;\nconst delta = factor + 10;\nconst final = intermediate + delta;\nconst result = calc(final);',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 38
-	},
-	{
-		content:
-			'const display = prefix + formatted + suffix;\nconst suffix = formatted + "]";\nconst formatted = value.toUpperCase();\nconst value = cleaned.trim();\nconst cleaned = prefix.toLowerCase();\nconst prefix = " Test ";',
-		facit:
-			'const prefix = " Test ";\nconst cleaned = prefix.toLowerCase();\nconst value = cleaned.trim();\nconst formatted = value.toUpperCase();\nconst suffix = formatted + "]";\nconst display = prefix + formatted + suffix;',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 39
-	},
-	{
-		content:
-			'const final = transform(processed);\nconst processed = normalize(validated);\nconst validated = validate(sanitized);\nconst sanitized = clean(input);\nconst input = raw.trim();\nconst raw = " data ";',
-		facit:
-			'const raw = " data ";\nconst input = raw.trim();\nconst sanitized = clean(input);\nconst validated = validate(sanitized);\nconst processed = normalize(validated);\nconst final = transform(processed);',
-		type: type.move,
-		difficulty: difficulty.hard,
-		id: 40
 	}
 ];
